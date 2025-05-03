@@ -1,0 +1,18 @@
+# Ambientes virtuais
+venv/
+
+# Arquivos temporários
+*.pyc
+__pycache__/
+
+# Relatórios e saídas
+*.png
+*.pdf
+output_summary.txt
+
+# Cache do Streamlit
+.streamlit/
+
+# Arquivos do VSCode ou PyCharm (opcional)
+.vscode/
+.idea/
