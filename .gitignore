@@ -1,5 +1,6 @@
 # Ambientes virtuais
 venv/
+faces/
 
 # Arquivos temporários
 *.pyc

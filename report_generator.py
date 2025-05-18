@@ -1,6 +1,6 @@
+
 from fpdf import FPDF
 import matplotlib.pyplot as plt
-
 
 def gerar_relatorio_pdf(data, filename="relatorio.pdf"):
     # Gerar gráfico de emoções
@@ -54,5 +54,19 @@ def gerar_relatorio_pdf(data, filename="relatorio.pdf"):
     pdf.image("grafico_emocoes.png", w=170)
     pdf.ln(5)
     pdf.image("grafico_atividades.png", w=170)
+
+    pdf.ln(10)
+    pdf.set_font("Arial", "B", 14)
+    pdf.cell(0, 10, "Exemplos de rostos detectados:", ln=True)
+    pdf.ln(5)
+
+    for emo, path in data.get("rostos", {}).items():
+        pdf.set_font("Arial", "", 12)
+        pdf.cell(0, 10, f"{emo}:", ln=True)
+        try:
+            pdf.image(path, w=50)
+        except:
+            pdf.cell(0, 10, "(erro ao carregar imagem)", ln=True)
+        pdf.ln(5)
 
     pdf.output(filename)

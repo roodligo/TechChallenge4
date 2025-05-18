@@ -1,3 +1,4 @@
+
 import streamlit as st
 import matplotlib.pyplot as plt
 from video_analysis import process_video_return_data
@@ -46,6 +47,11 @@ if st.session_state.data:
     ax2.pie(data["atividades"].values(), labels=data["atividades"].keys(), autopct="%1.1f%%", startangle=140)
     ax2.axis("equal")
     st.pyplot(fig2)
+
+    st.subheader("Exemplos de rostos detectados")
+    for emo, imagens in data["rostos"].items():
+        for i, path in enumerate(imagens):
+            st.image(path, caption=f"{emo} ({i+1})", width=200)
 
     gerar_relatorio_pdf(data)
     with open("relatorio.pdf", "rb") as f:
