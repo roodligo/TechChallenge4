@@ -60,13 +60,15 @@ def gerar_relatorio_pdf(data, filename="relatorio.pdf"):
     pdf.cell(0, 10, "Exemplos de rostos detectados:", ln=True)
     pdf.ln(5)
 
-    for emo, path in data.get("rostos", {}).items():
-        pdf.set_font("Arial", "", 12)
+    for emo, paths in data.get("rostos", {}).items():
+        pdf.set_font("Arial", "B", 12)
         pdf.cell(0, 10, f"{emo}:", ln=True)
-        try:
-            pdf.image(path, w=50)
-        except:
-            pdf.cell(0, 10, "(erro ao carregar imagem)", ln=True)
+        for i, path in enumerate(paths):
+            try:
+                pdf.image(path, w=50)
+            except:
+                pdf.set_font("Arial", "", 12)
+                pdf.cell(0, 10, f"(erro ao carregar imagem {i+1})", ln=True)
         pdf.ln(5)
 
     pdf.output(filename)
